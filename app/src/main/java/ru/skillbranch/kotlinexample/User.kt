@@ -73,7 +73,7 @@ class User private constructor(
         lastName: String?,
         rawPhone: String,
         method: Method
-    ): this(firstName, lastName, rawPhone = rawPhone, meta = mapOf("auth" to method.name)) {
+    ): this(firstName, lastName, rawPhone = rawPhone, meta = mapOf("src" to method.name)) {
         println("Secondary phone csv constructor")
 
         val code = generateAccessCode()
@@ -90,7 +90,7 @@ class User private constructor(
         salt: String,
         hash: String,
         method: Method
-    ): this(firstName, lastName, email = email, meta = mapOf("auth" to method.name)) {
+    ): this(firstName, lastName, email = email, meta = mapOf("src" to method.name)) {
         println("Secondary email csv constructor")
 
         passwordHash = hash
