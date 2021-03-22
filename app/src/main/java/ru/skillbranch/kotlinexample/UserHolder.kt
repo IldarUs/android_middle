@@ -1,4 +1,4 @@
-package ru.skillbranch.kotlinexemple
+package ru.skillbranch.kotlinexample
 
 import androidx.annotation.VisibleForTesting
 
@@ -71,11 +71,11 @@ object UserHolder {
                 }
             }
             val currentUser = User.makeCsvUser(
-                fullName = fullName,
-                email = email,
-                phone = phone,
-                salt = salt,
-                hash = hash
+                    fullName = fullName,
+                    email = email,
+                    phone = phone,
+                    salt = salt,
+                    hash = hash
             )
             map[currentUser.login] = currentUser
             result.add(currentUser)

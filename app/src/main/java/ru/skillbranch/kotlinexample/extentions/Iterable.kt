@@ -1,4 +1,4 @@
-package ru.skillbranch.kotlinexemple.extentions
+package ru.skillbranch.kotlinexample.extentions
 
 fun <T> Iterable<T>.dropLastUntil(predicate: (T) -> Boolean): List<T> {
     for (item in this) {
