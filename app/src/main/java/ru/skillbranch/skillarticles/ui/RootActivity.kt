@@ -4,9 +4,8 @@ import kotlinx.android.synthetic.main.activity_root.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.layout_bottombar.*
@@ -45,7 +44,7 @@ class RootActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val logo = if(toolbar.childCount>2) toolbar.getChildAt(2) as ImageView else null
         logo?.scaleType = ImageView.ScaleType.CENTER_CROP
-        (logo?.layoutParams as Toolbar.LayoutParams).let {
+        (logo?.layoutParams as? Toolbar.LayoutParams)?.let {
             it.width = this.dpToIntPx(40)
             it.height = this.dpToIntPx(40)
             it.marginEnd = this.dpToIntPx(16)
