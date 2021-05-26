@@ -1,10 +1,11 @@
 package ru.skillbranch.skillarticles.viewmodels
 
+import android.util.Log
 import androidx.annotation.UiThread
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.*
 
-abstract class BaseViewModel<T>(initState: T) : ViewModel() {
+abstract class BaseViewModel<T>(initState: T/*, private val savedStateHandle: SavedStateHandle*/) : ViewModel() {
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     val notifications = MutableLiveData<Event<Notify>>()
 
@@ -75,6 +76,11 @@ abstract class BaseViewModel<T>(initState: T) : ViewModel() {
         state.addSource(source) {
             state.value = onChanged(it, currentState) ?: return@addSource
         }
+    }
+
+    fun saveState() {
+        Log.e("BaseViewModel", "save state $currentState")
+        //savedStateHandle.set("state", currentState)
     }
 
 }

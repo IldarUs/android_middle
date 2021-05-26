@@ -1,6 +1,9 @@
 package ru.skillbranch.skillarticles.viewmodels
 
+import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
 import ru.skillbranch.skillarticles.data.ArticleData
 import ru.skillbranch.skillarticles.data.ArticlePersonalInfo
 import ru.skillbranch.skillarticles.data.repositories.ArticleRepository
@@ -8,11 +11,15 @@ import ru.skillbranch.skillarticles.extensions.data.toAppSettings
 import ru.skillbranch.skillarticles.extensions.data.toArticlePersonalInfo
 import ru.skillbranch.skillarticles.extensions.format
 
-class ArticleViewModel(private val articleId: String): BaseViewModel<ArticleState>(ArticleState()) {
+class ArticleViewModel(private val articleId: String/*, private val savedStateHandle: SavedStateHandle*/): BaseViewModel<ArticleState>(ArticleState()/*, savedStateHandle*/) {
     private val repository = ArticleRepository
     private var menuIsShown: Boolean = false
 
     init {
+        /*savedStateHandle.set("state") {
+            currentState.toBundle()
+        }*/
+
         subscribeOnDataSource(getArticleData()) { article, state ->
             article ?: return@subscribeOnDataSource null
             state.copy(
@@ -125,11 +132,12 @@ class ArticleViewModel(private val articleId: String): BaseViewModel<ArticleStat
         updateState { it.copy(isShowMenu = menuIsShown) }
     }
 
-    fun handleIsSearch(isSearch: Boolean) {
-        updateState { it.copy(isSearch = isSearch) }
+    fun handleSearchMode(isSearch: Boolean) {
+        updateState { it.copy(isSearch = isSearch, isShowMenu = false, searchPosition = 0) }
     }
 
-    fun handleSearchQuery(query: String?) {
+    fun handleSearch(query: String?) {
+        query ?: return
         updateState { it.copy(searchQuery = query) }
     }
 
@@ -157,4 +165,13 @@ data class ArticleState(
     val poster: String? = null,             //обложка статьи
     val content: List<Any> = emptyList(),   //контент
     val reviews: List<Any> = emptyList()    //комментарий
-)
+)/*: VMState {
+    fun toBundle(): Bundle {
+        val map = copy(content = emptyList(), isLoadingContent = true)
+            .asMap()
+            .toList()
+            .toTypedArray()
+
+        return bundleOf(*map)
+    }
+}*/
