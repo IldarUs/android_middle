@@ -54,6 +54,7 @@
         android:id="@+id/bottombar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="56dp"
         android:layout_gravity="bottom"
         android:theme="@style/ArticleBarsTheme"
         android:elevation="4dp"

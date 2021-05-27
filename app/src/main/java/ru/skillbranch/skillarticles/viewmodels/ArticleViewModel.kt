@@ -1,9 +1,6 @@
 package ru.skillbranch.skillarticles.viewmodels
 
-import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.SavedStateHandle
 import ru.skillbranch.skillarticles.data.ArticleData
 import ru.skillbranch.skillarticles.data.ArticlePersonalInfo
 import ru.skillbranch.skillarticles.data.repositories.ArticleRepository
