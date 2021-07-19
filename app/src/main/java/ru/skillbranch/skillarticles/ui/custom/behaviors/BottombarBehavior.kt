@@ -36,9 +36,11 @@ class BottombarBehavior: CoordinatorLayout.Behavior<Bottombar>() {
         consumed: IntArray,
         type: Int
     ) {
-        //dy<0 scroll down
-        //dy>0 scroll up
+        if(!child.isSearchMode) {
+            val offset = MathUtils.clamp(child.translationY + dy, 0f, child.height.toFloat())
+            if (offset != child.translationY) child.translationY = offset
+        }
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
-        child.translationY = max(0f, min(child.height.toFloat(), child.translationY + dy))
+        //child.translationY = max(0f, min(child.height.toFloat(), child.translationY + dy))
     }
 }

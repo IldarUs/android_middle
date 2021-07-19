@@ -24,9 +24,10 @@
             app:logo="@drawable/logo_placeholder"
             app:subtitle="loading..."
             app:title="@string/app_name"/>
-
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -35,6 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:text="Loading.."/>
     </androidx.core.widget.NestedScrollView>
 
