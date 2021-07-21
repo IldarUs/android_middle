@@ -1,12 +1,10 @@
 package ru.skillbranch.skillarticles.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Selection
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.ScrollingMovementMethod
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -56,7 +54,7 @@ class RootActivity : AppCompatActivity(), IArticleView {
         setupSubmenu()
 
         viewModel.observeState(this, ::renderUi)
-        viewModel.observeSubState(this, ArticleState::toBottombarData, ::renderBottombar)
+        viewModel.observeSubState(this, ArticleState::toBottombarData, ::renderBotombar)
         viewModel.observeSubState(this, ArticleState::toSubmenuData, ::renderSubmenu)
 
         viewModel.observeNotifications(this) {
@@ -176,7 +174,7 @@ class RootActivity : AppCompatActivity(), IArticleView {
         }
     }
 
-    override fun renderBottombar(data: BottombarData) {
+    override fun renderBotombar(data: BottombarData) {
         with(vbBottombar) {
             btnSettings.isChecked = data.isShowMenu
             btnLike.isChecked = data.isLike
