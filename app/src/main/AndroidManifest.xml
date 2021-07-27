@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".App">
+        android:name=".App"
+        android:extractNativeLibs="true">
         <activity android:name=".ui.RootActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
