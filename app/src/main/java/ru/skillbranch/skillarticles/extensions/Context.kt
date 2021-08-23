@@ -1,6 +1,7 @@
 package ru.skillbranch.skillarticles.extensions
 
 import android.content.Context
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -37,3 +38,9 @@ val Context.isNetworkAvailable: Boolean
             cm.activeNetworkInfo?.run { isConnectedOrConnecting } ?: false
         }
     }
+
+fun Context.attrValue(colorSecondary: Int): Int {
+    val tv = TypedValue()
+    return if (theme.resolveAttribute(colorSecondary, tv, true)) tv.data
+    else throw Resources.NotFoundException("Resource with id $colorSecondary not found")
+}

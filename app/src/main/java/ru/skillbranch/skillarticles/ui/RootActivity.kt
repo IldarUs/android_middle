@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Selection
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.method.LinkMovementMethod
 import android.text.method.ScrollingMovementMethod
 import android.view.Menu
 import android.view.MenuItem
@@ -24,6 +25,7 @@ import ru.skillbranch.skillarticles.R
 import ru.skillbranch.skillarticles.databinding.ActivityRootBinding
 import ru.skillbranch.skillarticles.extensions.dpToIntPx
 import ru.skillbranch.skillarticles.extensions.setMarginOptionally
+import ru.skillbranch.skillarticles.markdown.MarkdownBuilder
 import ru.skillbranch.skillarticles.ui.custom.SearchFocusSpan
 import ru.skillbranch.skillarticles.ui.custom.SearchSpan
 import ru.skillbranch.skillarticles.ui.delegates.AttrValue
@@ -201,10 +203,13 @@ class RootActivity : AppCompatActivity(), IArticleView {
 
         with(vb.tvTextContent) {
             textSize = if(data.isBigText) 18f else 14f
-            movementMethod = ScrollingMovementMethod()
-            val content = if (data.isLoadingContent) "loading" else data.content.first()
-            if(text.toString() == content) return@with
-            setText(content, TextView.BufferType.SPANNABLE)
+            movementMethod = LinkMovementMethod() //for scroll and handle link click
+
+            //val content = if (data.isLoadingContent) "loading" else data.content.first()
+            //if(text.toString() == content) return@with
+            MarkdownBuilder(context)
+                .markdownToSpan(data.content)
+                    .run { setText(this, TextView.BufferType.SPANNABLE) }
         }
 
         //bind toolbar
